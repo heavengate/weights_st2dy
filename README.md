@@ -1,7 +1,7 @@
 # weights_st2dy
 
 
-1. `layers.py` 替换paddle包中 `paddle/fluid/dygraph/layers.py`, `layer_helper_base` 替换paddle包中 `paddle/fluid/layer_helper_base.py`, 可以通过`pip install/uninstall`获取paddle包安装路径，替换过程建议用vimdiff把增量代码替换过去。
+1. `layers.py` 替换paddle包中 `paddle/fluid/dygraph/layers.py`, `layer_helper_base.py` 替换paddle包中 `paddle/fluid/layer_helper_base.py`, 可以通过`pip install/uninstall`获取paddle包安装路径，替换过程建议用vimdiff把增量代码替换过去。
 
 2. 准备PaddleDetection静态图和动态图的代码库, `static_print.py` 移动至静态图库中，`dynamic_print.py` 移动至动态图库中, 运行对应配置文件并将输出保存为文件，如：
 
