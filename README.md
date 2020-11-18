@@ -5,7 +5,7 @@
 本项目为辅助获得静态图和动态图权重名对应关系并基于此对应关系转换权重，流程如下：
 
 1. 静态图一层层顺序创建，故在`create_parameter`时打印权重名和shape (static_print.py)
-2. 动态图`create_parameter`在`__init__`里，网络计算在`forward`里，顺序不一定一致，故在`forward`里打印权重名和shape (dynamic_print.py)
+2. 动态图`create_parameter`在`__init__`里，网络计算在`forward`里，顺序不一定一致，故在`forward`里打印权重名和shape (dygraph_print.py)
 3. 从前到后依次匹配静态图和动态图的权重名，须shape能匹配上，若shape匹配不上，会自动搜索后续shape能匹配上的动态图权重名，选出候选权重名供用户手动选择 (parse.py)
 4. 匹配完静态图和动态图权重名对应关系存储在`weight_name_map.txt`中，通过`convert.py`将静态图权重转换为动态图权重 (convert.py)
 
@@ -37,7 +37,7 @@ python static_print.py -c configs/yolov3_darknet.yml 2>&1 | tee yolov3_st_print.
 
 ```
 # 动态图库中
-python static_print.py -c configs/yolov3_darknet53_270e_coco.yml 2>&1 | tee yolov3_dy_print.txt
+python dygraph_print.py -c configs/yolov3_darknet53_270e_coco.yml 2>&1 | tee yolov3_dy_print.txt
 ```
 
 3. 运行`parse.py`如下，会解析静态图和动态图权重名对应关系，并将结果保存为`weight_name_map.txt`
