@@ -2,7 +2,7 @@
 
 ## 说明
 
-本项目为辅助获得静态图和动态图权重名对应关系，流程如下：
+本项目为辅助获得静态图和动态图权重名对应关系并基于此对应关系转换权重，流程如下：
 
 1. 静态图一层层顺序创建，故在`create_parameter`时打印权重名和shape (static_print.py)
 2. 动态图`create_parameter`在`__init__`里，网络计算在`forward`里，顺序不一定一致，故在`forward`里打印权重名和shape (dynamic_print.py)
