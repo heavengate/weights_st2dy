@@ -6,7 +6,7 @@
 
 1. 静态图一层层顺序创建，故在`create_parameter`时打印权重名和shape (static_print.py)
 2. 动态图`create_parameter`在`__init__`里，网络计算在`forward`里，顺序不一定一致，故在`forward`里打印权重名和shape (dynamic_print.py)
-3. 从前到后一次匹配静态图和动态图的权重名，须shape能匹配上，若shape匹配不上，会自动搜索后续能匹配上的动态图权重名，选出候选权重名供用户手动选择 (parse.py)
+3. 从前到后依次匹配静态图和动态图的权重名，须shape能匹配上，若shape匹配不上，会自动搜索后续shape能匹配上的动态图权重名，选出候选权重名供用户手动选择 (parse.py)
 4. 匹配完静态图和动态图权重名对应关系存储在`weight_name_map.txt`中，通过`convert.py`将静态图权重转换为动态图权重 (convert.py)
 
 **注意：** 权重匹配过程中已自动将Conv-BN和FC的weight-bias融合匹配
