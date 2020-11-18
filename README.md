@@ -11,6 +11,18 @@
 
 **注意：** 权重匹配过程中已自动将Conv-BN和FC的weight-bias融合匹配
 
+可以尝试如下两条命令体验匹配过程:
+
+YOLOv3
+```
+python parse.py yolov3_dy_print.txt yolov3_st_print.txt
+```
+
+MaskRCNN
+```
+python parse.py mask_fpn_dy_print.txt mask_fpn_st_print.txt
+```
+
 ## 用法
 
 1. `layers.py` 替换paddle包中 `paddle/fluid/dygraph/layers.py`, `layer_helper_base.py` 替换paddle包中 `paddle/fluid/layer_helper_base.py`, 可以通过`pip install/uninstall`获取paddle包安装路径，替换过程建议用vimdiff把增量代码替换过去。
