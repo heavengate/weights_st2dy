@@ -32,11 +32,15 @@ def convert(weights, weight_name_map_file, target_name):
     dst = {}
     weights = get_weights_path(weights)
     if os.path.isdir(weights):
-        load = Load()
         for k, v in weight_name_map.items():
-            weight = load(os.path.join(weights, k))
-            weight = weight.numpy()
-            dst[v] = weight
+            k_path = os.path.join(weights, k)
+            if os.path.exists(k_path):
+                load = Load()
+                weight = load(os.path.join(weights, k))
+                weight = weight.numpy()
+                dst[v] = weight
+            else:
+                print("warning: static weight file {} not found".format(k))
     else:
         src = pickle.load(open(weights))
         for k, v in weight_name_map.items():
