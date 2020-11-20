@@ -91,6 +91,27 @@ rpn_cls_logits_fpn2_w                              rpn_head.rpn_rois_score.weigh
 rpn_cls_logits_fpn2_b                              rpn_head.rpn_rois_score.bias
 ```
 
+若使用`ResNet`结构，注意确认一下`shortcut`分支的权重顺序，即动态图`short.conv/norm`应该对应静态图的branch1，若出现错位，可手动修改下`weight_name_map.txt`
+
+```
+bn2a_branch2b_mean                                 backbone.res2.res2a.branch2b.norm._mean
+bn2a_branch2b_variance                             backbone.res2.res2a.branch2b.norm._variance
+#  -------------------- short和branch2顺序反了 --------------------
+res2a_branch2c_weights                             backbone.res2.res2a.short.conv.weight
+bn2a_branch2c_scale                                backbone.res2.res2a.short.norm.weight
+bn2a_branch2c_offset                               backbone.res2.res2a.short.norm.bias
+bn2a_branch2c_mean                                 backbone.res2.res2a.short.norm._mean
+bn2a_branch2c_variance                             backbone.res2.res2a.short.norm._variance
+res2a_branch1_weights                              backbone.res2.res2a.branch2c.conv.weight
+bn2a_branch1_scale                                 backbone.res2.res2a.branch2c.norm.weight
+bn2a_branch1_offset                                backbone.res2.res2a.branch2c.norm.bias
+bn2a_branch1_mean                                  backbone.res2.res2a.branch2c.norm._mean
+bn2a_branch1_variance                              backbone.res2.res2a.branch2c.norm._variance
+#  ----------------------------------------------------------------
+res2b_branch2a_weights                             backbone.res2.res2b.branch2a.conv.weight
+bn2b_branch2a_scale                                backbone.res2.res2b.branch2a.norm.weight
+```
+
 4. 使用`convert.py` 和 3 中生成的 `weight_name_map.txt` 完成权重转换，命令如下：
 
 命令行传递三个参数，为静态图权重(支持url)，3中的`weight_name_map.txt`和导出动态图权重文件名。
