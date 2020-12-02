@@ -1,4 +1,3 @@
-grep: warning: GREP_OPTIONS is deprecated; please use an alias or script
 st_parameter yolo_input.conv.weights [32, 3, 3, 3]
 st_parameter yolo_input.bn.scale [32]
 st_parameter yolo_input.bn.offset [32]
@@ -365,11 +364,5 @@ st_parameter yolo_block.2.tip.bn.mean [256]
 st_parameter yolo_block.2.tip.bn.var [256]
 st_parameter yolo_output.2.conv.weights [255, 256, 1, 1]
 st_parameter yolo_output.2.conv.bias [255]
-/usr/local/lib/python3.7/site-packages/paddle/fluid/layer_helper_base.py:93: DeprecationWarning: invalid escape sequence \.
-  """
-/paddle/ssd3/git/PaddleDetection/ppdet/utils/voc_utils.py:70: DeprecationWarning: invalid escape sequence \.
-  elif re.match('test\.txt', fname):
-/paddle/ssd3/git/PaddleDetection/ppdet/utils/voc_utils.py:68: DeprecationWarning: invalid escape sequence \.
-  if re.match('trainval\.txt', fname):
-/paddle/ssd3/git/PaddleDetection/ppdet/core/workspace.py:118: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+/paddle/PaddleDetection/ppdet/core/workspace.py:118: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
   isinstance(merge_dct[k], collections.Mapping)):

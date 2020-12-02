@@ -41,6 +41,8 @@ def parse_dygraph_params_states(filename):
 def parse_dygraph_infos(params, states):
     infos = []
     for param in params:
+        if param['id'] not in states:
+            continue
         states_names = states[param['id']]
         if len(states_names) != len(param['names']):
             print("***NOTE: dygraph weights recount: {} != {}, {}, {}".format(len(states_names), len(param['names']), states_names, param['names']))
@@ -132,10 +134,11 @@ if __name__ == "__main__":
     st_filename = sys.argv[2]
     params, states = parse_dygraph_params_states(dy_filename)
     dygraph_infos = parse_dygraph_infos(params, states)
-    dy_conv = check_is_conv_bn_or_fc(dygraph_infos)
-    # for info, c in zip(dygraph_infos, dy_conv):
-    #     print(info, c)
+    # for info, c in dygraph_infos:
+    #     print(info)
     static_infos = parse_static_infos(st_filename)
+    # for info in static_infos:
+    #     print(info)
     print("dygraph weights number: ", len(dygraph_infos))
     print("static weights number: ", len(static_infos))
     match_static_to_dygraph(static_infos, dygraph_infos)
